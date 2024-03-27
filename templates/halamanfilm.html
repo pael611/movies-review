@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+
+        .mytitle {
+            width: 100%;
+            height: 250px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mytitle>button {
+            width: 200px;
+            height: 50px;
+
+            background-color: transparent;
+            color: white;
+
+            border-radius: 50px;
+            border: 1px solid white;
+
+            margin-top: 10px;
+        }
+
+        .mytitle>button:hover {
+            border: 2px solid white;
+        }
+
+        .mycard {
+            margin: 20px auto 0px auto;
+            width: 95%;
+            max-width: 1200px;
+
+        }
+
+        .komentar {
+            color: gray;
+        }
+
+        .buatpost {
+            width: 95%;
+            max-width: 500px;
+            margin: 20px auto 0px auto;
+            padding: 20px;
+            box-shadow: 0px 0px 3px 0px;
+            display: none;
+
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .buttons>button {
+            margin-right: 10px;
+        }
+    </style>
+
+    <script>
+
+
+        function postfilm() {
+            let url = $('#inputemail').val();
+            let komentar = $('#inputkomen').val();
+            let rating = $('#inputrating').val();
+
+            if (url === '' || judul === '' || deskripsi === '' || komentar === '' || rating === '') {
+                alert('Lengkapi Form Penambahan Film')
+            } else {
+                let postfilm = `<div class="col mt-3 mb-3">
+                <div class="card h-100">
+                    <img src="${url}"
+                        class="card-img-top " alt="bgfilm">
+                    <div class="card-body">
+                        <h5 class="card-title"><b>${judul}</b></h5>
+                        <p class="card-text">${deskripsi}</p>
+                        <p>${rating}</p>
+                        <p class="komentar">${komentar}</p>
+                    </div>
+                </div>
+            </div>`;
+                $('#cards-box').append(postfilm);
+                alert('Berhasil Ditambahkan!')
+            }
+        }
+
+
+        function open_box() {
+            $('#sformfilm').show();
+        }
+        function close_box() {
+            $('#sformfilm').hide();
+
+        }
+
+    </script>
+
+</head>
+
+
+<body>
+    <div class="mytitle">
+        <h1>My favorite movies</h1>
+        <button onclick="open_box()">Save a new movie</button>
+    </div>
+
+    <div class="buatpost" id="sformfilm">
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputemail" placeholder="Masukkan URL Movie">
+            <label for="floatingInput">Movie Image URL</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="inputjudul" placeholder="Masukkan Judul Movie">
+            <label for="floatingInput">Judul</label>
+        </div>
+
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupSelect01">Rate</label>
+            <select class="form-select " id="inputrating">
+                <option selected>Pilih Rating</option>
+                <option value="⭐">⭐</option>
+                <option value="⭐⭐">⭐⭐</option>
+                <option value="⭐⭐⭐">⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐">⭐⭐⭐⭐</option>
+                <option value="⭐⭐⭐⭐⭐">⭐⭐⭐⭐⭐</option>
+            </select>
+        </div>
+
+        <div class="form-floating mb-3">
+            <textarea class="form-control" placeholder="Berikan Deskripsi" id="inputdeskripsi"></textarea>
+            <label for="floatingTextarea">Deskripsi</label>
+        </div>
+
+
+        <div class="form-floating">
+            <textarea class="form-control" placeholder="Berikan Komentar disini" id="inputkomen"></textarea>
+            <label for="floatingTextarea">Comments</label>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-dark" id="simpanfilm" onclick="postfilm()">Save</button>
+            <button type="button" class="btn btn-outline-light" onclick="close_box()">Close</button>
+        </div>
+    </div>
+
+    <div class="mycard">
+        <div class="row row-cols-md-4" id="cards-box">
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://m.media-amazon.com/images/M/MV5BZmY2NjUzNDQtNTgxNC00M2Q4LTljOWQtMjNjNDBjNWUxNmJlXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_QL75_UX190_CR0,2,190,237_.jpg"
+                        class="card-img-top " alt="bgfilm">
+                    <div class="card-body">
+                        <h5 class="card-title">GRave of Fireflies</h5>
+                        <p class="card-text">2 Saudara yang bertahan hidup setelah Pengeboman Hiroshima dan Nagasaki</p>
+                        <p>⭐⭐⭐⭐⭐</p>
+                        <p class="komentar">Saya sangant Menyukai Film Ini</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://awsimages.detik.net.id/community/media/visual/2021/11/23/kadet-1947.jpeg?w=1080"
+                        class="card-img-top " alt="bgfilm">
+                    <div class="card-body">
+                        <h5 class="card-title">Kadet 1947</h5>
+                        <p class="card-text">Perjuangan Pemuda pada tahun 1947</p>
+                        <p>⭐⭐⭐⭐⭐</p>
+                        <p class="komentar">Saya sangant Menyukai Film Ini</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://disk.mediaindonesia.com/thumbs/1200x700/news/2023/11/b02780a193e6b5bc5927d61b64a5c23f.jpeg"
+                        class="img-thumbnail card-img-top" alt="bgfilm">
+                    <div class="card-body">
+                        <h5 class="card-title">Agak Laen</h5>
+                        <p class="card-text">4 Pemuda yang Mengalami hal mistis</p>
+                        <p>⭐⭐⭐⭐⭐</p>
+                        <p class="komentar">Saya sangant Menyukai Film Ini</p>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100">
+                    <img src="https://cdn.idntimes.com/content-images/duniaku/post/20240122/img-20240122-140811-fd62caf1cb5d1988e5a535fd1f77e4b1.jpg"
+                        class="img-thumbnail card-img-top" alt="bgfilm">
+                    <div class="card-body">
+                        <h5 class="card-title">Avatar The Legend Of Ang</h5>
+                        <p class="card-text">Pengendali 5 Elemen terakhir yang Hidup</p>
+                        <p>⭐⭐⭐⭐⭐</p>
+                        <p class="komentar">Saya sangant Menyukai Film Ini</p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
+<!-- https://movie-phinf.pstatic.net/20210715_95/1626338192428gTnJl_JPEG/movie_image.jpg
+linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)) -->
+<!-- https://m.media-amazon.com/images/M/MV5BNDYxNjQyMjAtNTdiOS00NGYwLWFmNTAtNThmYjU5ZGI2YTI1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg -->
+<!-- ⭐⭐⭐
+https://getemoji.com/ -->
